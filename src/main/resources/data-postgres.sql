@@ -1,3 +1,3 @@
-TRUNCATE publishers,advertisements,ads RESTART IDENTITY;
-INSERT INTO publishers(name, publisher_address, publisher_contact) VALUES('Adsense','Mountain View, California, United States','info@adsense.com');
-INSERT INTO publishers(name, publisher_address, publisher_contact) VALUES('Elanaat','Tartu mnt 4590','info@elanaat.com');
+TRUNCATE customers,drivers,users RESTART IDENTITY;
+INSERT INTO customers(name, phone_number) VALUES('Monika','+37258902211');
+INSERT INTO customers(name, phone_number) VALUES('jtm','+37211223344');

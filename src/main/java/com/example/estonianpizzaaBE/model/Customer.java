@@ -1,5 +1,5 @@
 package com.example.estonianpizzaaBE.model;
-
+import java.sql.Driver;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -7,15 +7,14 @@ import javax.persistence.*;
 @Table(name = "customers")
 public class Customer {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     @Column(name = "name")
     public String name;
-    @Column(name = "publisher_address")
-    public String publisher_address;
-    @Column(name = "publisher_contact")
-    public String publisher_contact;
+    @Column(name = "phone_number")
+    public String phone_number;
 
     public long getId() {
         return id;
@@ -23,20 +22,12 @@ public class Customer {
     public void setId(long id) {
         this.id = id;
     }
-    public String getPublisher_address() {
-        return publisher_address;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPublisher_address(String publisher_address) {
-        this.publisher_address = publisher_address;
-    }
-
-    public String getPublisher_contact() {
-        return publisher_contact;
-    }
-
-    public void setPublisher_contact(String publisher_contact) {
-        this.publisher_contact = publisher_contact;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getName() {
@@ -54,32 +45,34 @@ public class Customer {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             })
-    @JoinTable(name = "ads",
-            joinColumns = { @JoinColumn(name = "publisher_id") },
-            inverseJoinColumns = { @JoinColumn(name = "advertisement_id") })
-    private Set<Advertisement> advertisements = new HashSet<>();
+    @JoinTable(name = "users",
+            joinColumns = { @JoinColumn(name = "customer_id") },
+            inverseJoinColumns = { @JoinColumn(name = "driver_id") })
+    private Set<Driver> drivers = new HashSet<>();
 
     public Customer() {
     }
-    public Customer(String name, String publisher_address, String publisher_contact) {
+    public Customer(String name, String phone_number) {
         this.name = name;
-        this.publisher_address = publisher_address;
-        this.publisher_contact = publisher_contact;
+        this.phone_number = phone_number;
     }
     // getters and setters
-    public void addAdvertisement(Advertisement advertisement) {
-        this.advertisements.add(advertisement);
-        advertisement.getPublishers().add(this);
-    }
 
-    public void removeAdvertisement(long AdvertisementId) {
-        Advertisement advertisement = this.advertisements.stream().filter(t -> t.getId() == AdvertisementId).findFirst().orElse(null);
-        if (advertisement != null) this.advertisements.remove(advertisement);
-        advertisement.getPublishers().remove(this);
-    }
+    // public void addDriver(Driver driver) {
+    //     this.drivers.add(driver);
+    //     driver.getCustomers().add(this);
+    // }
 
-    @Override
-    public String toString() {
-        return "Publisher [id=" + id + ", name=" + name + ", address=" + publisher_address + ", contact=" + publisher_contact + "]";
-    }
+
+
+    // public void removeDriver(long DriverId) {
+    //     Driver driver = this.drivers.stream().filter(t -> t.getId() == DriverId).findFirst().orElse(null);
+    //     if (driver != null) this.drivers.remove(driver);
+    //     driver.getCustomers().remove(this);
+    // }
+
+    // @Override
+    // public String toString() {
+    //     return "Customer [id=" + id + ", name=" + name + ", phone=" + phone_number + "]";
+    // }
 }

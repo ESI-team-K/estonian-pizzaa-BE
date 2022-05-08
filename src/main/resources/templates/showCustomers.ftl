@@ -11,15 +11,13 @@
   <tr>
     <th>Id</th>
     <th>Name</th>
-    <th>Address</th>
-    <th>Contacts</th>
+    <th>Phone</th>
   </tr>
-  <#list publishers as publisher>
+  <#list customers as customer>
       <tr>
-        <td>${publisher.id}</td>
-        <td>${publisher.name}</td>
-        <td>${publisher.publisher_address}</td>
-        <td>${publisher.publisher_contact}</td>
+        <td>${customer.id}</td>
+        <td>${customer.name}</td>
+        <td>${customer.phone_number}</td>
       </tr>
   </#list>
 </table>
