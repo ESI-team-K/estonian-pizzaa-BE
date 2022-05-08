@@ -45,7 +45,7 @@ public class PaymentController {
         return new ResponseEntity<>(payment, null, 200);
     }
 
-    @PostMapping("/{id}/pay/cash")
+    @PatchMapping("/{id}/pay/cash")
     public ResponseEntity<Payment> payByCash(@PathVariable Long id) {
         // Auth?
         Payment payment = paymentService.payByCash(id);
@@ -53,10 +53,16 @@ public class PaymentController {
         return new ResponseEntity<>(payment, null, 200);
     }
 
-    @PutMapping("/{id}/cancel")
+    @PatchMapping("/{id}/cancel")
     // Auth?
     public ResponseEntity<Payment> cancelPayment(@PathVariable Long id) {
         Payment payment = paymentService.setPaymentToCanceled(id);
+        return new ResponseEntity<>(payment, null, 200);
+    }
+
+    @PatchMapping("/{id}/refund")
+    public ResponseEntity<Payment> refundPayment(@PathVariable Long id) {
+        Payment payment = paymentService.refundPayment(id);
         return new ResponseEntity<>(payment, null, 200);
     }
 

@@ -121,4 +121,10 @@ public class PaymentService {
     public Payment getPayment(Long id) {
         return paymentRepository.findById(id).orElseThrow(PaymentNotFoundException::new);
     }
+
+    public Payment refundPayment(Long id) {
+        // Replace logic when actual payment implemented
+        setPaymentToCanceled(id);
+        return paymentRepository.findById(id).orElseThrow(PaymentNotFoundException::new);
+    }
 }
