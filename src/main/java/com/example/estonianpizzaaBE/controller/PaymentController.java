@@ -16,9 +16,15 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Payment> getPayment(@PathVariable Long id) {
+        Payment payment = paymentService.getPayment(id);
+        return new ResponseEntity<>(payment, null, 200);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Payment> createPayment(@RequestBody Payment payment) {
-        //TODO create payment from pending order, see what they can send you.
+        // TODO create payment from pending order, see what they can send you.
         // Requestbody might change, need to ask what they will send
         // Auth?
         Payment createdPayment = paymentService.createPayment(payment);

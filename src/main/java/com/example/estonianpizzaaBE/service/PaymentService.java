@@ -46,4 +46,7 @@ public class PaymentService {
         }
     }
 
+    public Payment getPayment(Long id) {
+        return paymentRepository.findById(id).orElseThrow(PaymentNotFoundException::new);
+    }
 }
