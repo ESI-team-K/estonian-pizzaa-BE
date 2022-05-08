@@ -53,7 +53,7 @@ public class PaymentService {
         throwIfInvalidCard(cardPaymentInfo);
 
         // This is where actual payment would go, however we just emulate it
-        PaymentCard paymentCard = createPaymentCard(cardPaymentInfo);
+        PaymentCard paymentCard = payForOrder(cardPaymentInfo);
 
         payment.setStatus(PaymentStatus.PAID);
         payment.setMethod(PaymentMethod.CARD);
@@ -71,7 +71,7 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
-    private PaymentCard createPaymentCard(PaymentController.CardPaymentInfo cardPaymentInfo) {
+    private PaymentCard payForOrder(PaymentController.CardPaymentInfo cardPaymentInfo) {
         PaymentCard paymentCard = new PaymentCard();
         paymentCard.setLastNumbers(cardPaymentInfo.getCardNumber().substring(cardPaymentInfo.getCardNumber().length() - 4));
         paymentCard.setCardType(cardPaymentInfo.getCardType());
@@ -99,7 +99,7 @@ public class PaymentService {
 //
 //        throwIfStatusNotPending(payment);
 //
-//        payment.setStatus(PaymentStatus.PAID);
+//       payment.setStatus(PaymentStatus.PAID);
 //        return paymentRepository.save(payment);
 //    }
 
