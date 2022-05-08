@@ -67,8 +67,8 @@ public class Address {
 
 
 
-    @OneToOne(mappedBy = "addresses")
-    private Customer customer;
+    // @OneToOne(mappedBy = "addresses")
+    // private Customer customer;
 
     public Address(long house_number, String street, String city, String state, long postal_code) {
         this.house_number = house_number;

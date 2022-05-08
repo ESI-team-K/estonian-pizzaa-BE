@@ -24,18 +24,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class CustomerController {
     @Autowired
     CustomerRepository customerRepository;
-    @GetMapping("/customers")
-    public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam(required = false) String customer_name) {
-        List<Customer> customers = new ArrayList<Customer>();
-        if (customer_name == null)
-            customerRepository.findAll().forEach(customers::add);
-        else
-            customerRepository.findByNameContaining(customer_name).forEach(customers::add);
-        if (customers.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
+    // @GetMapping("/customers")
+    // public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam(required = false) String customer_name) {
+    //     List<Customer> customers = new ArrayList<Customer>();
+    //     if (customer_name == null)
+    //         customerRepository.findAll().forEach(customers::add);
+    //     else
+    //         customerRepository.findByNameContaining(customer_name).forEach(customers::add);
+    //     if (customers.isEmpty()) {
+    //         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    //     }
+    //     return new ResponseEntity<>(customers, HttpStatus.OK);
+    // }
     @GetMapping("/customers/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") long id) {
         Customer customer = customerRepository.findById(id)

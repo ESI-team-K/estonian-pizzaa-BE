@@ -28,14 +28,14 @@ public class DriverController {
         return new ResponseEntity<>(drivers, HttpStatus.OK);
     }
 
-    @GetMapping("/customers/{customerId}/drivers")
-    public ResponseEntity<List<Driver>> getAllDriversByCustomerId(@PathVariable(value = "customerId") Long customerId) {
-        if (!customerRepository.existsById(customerId)) {
-            throw new ResourceNotFoundException("Not found Customer with id = " + customerId);
-        }
-        List<Driver> tags = driverRepository.findDriverByCustomersId(customerId);
-        return new ResponseEntity<>(tags, HttpStatus.OK);
-    }
+    // @GetMapping("/customers/{customerId}/drivers")
+    // public ResponseEntity<List<Driver>> getAllDriversByCustomerId(@PathVariable(value = "customerId") Long customerId) {
+    //     if (!customerRepository.existsById(customerId)) {
+    //         throw new ResourceNotFoundException("Not found Customer with id = " + customerId);
+    //     }
+    //     List<Driver> tags = driverRepository.findDriverByCustomersId(customerId);
+    //     return new ResponseEntity<>(tags, HttpStatus.OK);
+    // }
     @GetMapping("/drivers/{id}")
     public ResponseEntity<Driver> getDriversById(@PathVariable(value = "id") Long id) {
         Driver driver = driverRepository.findById(id)
@@ -43,14 +43,14 @@ public class DriverController {
         return new ResponseEntity<>(driver, HttpStatus.OK);
     }
 
-    @GetMapping("/drivers/{driversId}/customers")
-    public ResponseEntity<List<Customer>> getAllCustomersByDriversId(@PathVariable(value = "driversId") Long driverId) {
-        if (!driverRepository.existsById(driverId)) {
-            throw new ResourceNotFoundException("Not found Driver  with id = " + driverId);
-        }
-        List<Customer> customers = customerRepository.findCustomersByDriversId(driverId);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
+    // @GetMapping("/drivers/{driversId}/customers")
+    // public ResponseEntity<List<Customer>> getAllCustomersByDriversId(@PathVariable(value = "driversId") Long driverId) {
+    //     if (!driverRepository.existsById(driverId)) {
+    //         throw new ResourceNotFoundException("Not found Driver  with id = " + driverId);
+    //     }
+    //     List<Customer> customers = customerRepository.findCustomersByDriversId(driverId);
+    //     return new ResponseEntity<>(customers, HttpStatus.OK);
+    // }
     @PostMapping("/customers/{customerId}/drivers")
     public ResponseEntity<Driver> addDriver(@PathVariable(value = "customerId") Long customerId, @RequestBody Driver driverRequest) {
         Driver driver = customerRepository.findById(customerId).map(customer -> {
