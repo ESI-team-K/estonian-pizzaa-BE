@@ -1,7 +1,8 @@
-package com.example.repository;
+package com.example.estonianpizzaaBE.repository;
 
-import com.example.estonianpizzaaBE.model.Notification;
-import org.springframework.data.repository.CrudRepository;
+import com.example.estonianpizzaaBE.model.Delivery;
 
-public interface NotificationRepository extends CrudRepository<Notification, Long> {
+// import org.springframework.data.repository.CrudRepository;
+
+public interface DeliveryRepository {// extends CrudRepository<Delivery, Long> {
 }
