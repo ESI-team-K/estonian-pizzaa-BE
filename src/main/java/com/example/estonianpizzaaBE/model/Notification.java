@@ -1,9 +1,6 @@
 package com.example.estonianpizzaaBE.model;
 
 import java.time.Instant;
-import java.util.Date;
-
-import com.fasterxml.jackson.databind.annotation.JsonAppend.Prop;
 
 public class Notification {
 
@@ -17,5 +14,21 @@ public class Notification {
         this.notifyUserId = notifyUserId;
         this.message = message;
         this.notifyDateTime = Instant.now();
+    }
+
+    public long getId() {
+        return notificationId;
+    }
+
+    public long getNotifyUserId() {
+        return notifyUserId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Instant getNotifyDateTime() {
+        return notifyDateTime;
     }
 }
