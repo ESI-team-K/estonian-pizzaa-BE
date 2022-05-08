@@ -1,5 +1,6 @@
 package com.example.estonianpizzaaBE.service;
 
+import com.example.estonianpizzaaBE.exception.payment.InvalidPaymentStatusException;
 import com.example.estonianpizzaaBE.exception.payment.PaymentNotFoundException;
 import com.example.estonianpizzaaBE.model.payment.Payment;
 import com.example.estonianpizzaaBE.model.payment.PaymentStatus;
@@ -41,7 +42,7 @@ public class PaymentService {
 
     private void throwIfStatusNotPending(Payment payment) {
         if (payment.getStatus() != PaymentStatus.PENDING) {
-            throw new PaymentNotFoundException();
+            throw new InvalidPaymentStatusException();
         }
     }
 
