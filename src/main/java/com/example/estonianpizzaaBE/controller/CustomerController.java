@@ -44,14 +44,14 @@ public class CustomerController {
     }
     @PostMapping("/customers")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        Customer _customer = customerRepository.save(new Customer(customer.getName(), customer.getPhone_number()));
+        Customer _customer = customerRepository.save(new Customer(customer.getUsername(), customer.getEmail(), customer.getPassword(), customer.getPhone_number()));
         return new ResponseEntity<>(_customer, HttpStatus.CREATED);
     }
     @PutMapping("/customers/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
         Customer _customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found Customer with id = " + id));
-        _customer.setName(customer.getName());
+        _customer.setUsername(customer.getUsername());
         _customer.setPhone_number(customer.getPhone_number());
 
         return new ResponseEntity<>(customerRepository.save(_customer), HttpStatus.OK);
