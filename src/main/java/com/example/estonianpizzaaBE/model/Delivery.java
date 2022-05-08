@@ -9,7 +9,7 @@ public class Delivery {
     private final long estimateDeliveryTime; // minute
     private final Instant startDeliveryTime;
     private final Instant endDeliveryTime;
-    // TODO: Recipient model
+    // TODO: Recipient model /
     private final String recipientName;
     private final String recipientPhoneNumber;
     private final String recipientAddress;
