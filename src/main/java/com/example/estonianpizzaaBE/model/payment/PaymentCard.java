@@ -1,4 +1,4 @@
-package com.example.estonianpizzaaBE.model;
+package com.example.estonianpizzaaBE.model.payment;
 
 import lombok.Getter;
 import lombok.Setter;

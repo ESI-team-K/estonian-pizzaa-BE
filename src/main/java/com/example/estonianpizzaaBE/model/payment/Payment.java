@@ -1,4 +1,4 @@
-package com.example.estonianpizzaaBE.model;
+package com.example.estonianpizzaaBE.model.payment;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,7 @@ public class Payment {
 
     private PaymentMethod method;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_card_id")
     private PaymentCard paymentCard;
 

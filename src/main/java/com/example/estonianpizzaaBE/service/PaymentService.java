@@ -1,8 +1,8 @@
 package com.example.estonianpizzaaBE.service;
 
-import com.example.estonianpizzaaBE.exception.PaymentNotFoundException;
-import com.example.estonianpizzaaBE.model.Payment;
-import com.example.estonianpizzaaBE.model.PaymentStatus;
+import com.example.estonianpizzaaBE.exception.payment.PaymentNotFoundException;
+import com.example.estonianpizzaaBE.model.payment.Payment;
+import com.example.estonianpizzaaBE.model.payment.PaymentStatus;
 import com.example.estonianpizzaaBE.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
 

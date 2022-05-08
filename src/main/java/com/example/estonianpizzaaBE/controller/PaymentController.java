@@ -1,6 +1,6 @@
 package com.example.estonianpizzaaBE.controller;
 
-import com.example.estonianpizzaaBE.model.Payment;
+import com.example.estonianpizzaaBE.model.payment.Payment;
 import com.example.estonianpizzaaBE.service.PaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

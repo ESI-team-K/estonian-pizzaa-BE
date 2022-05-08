@@ -1,4 +1,4 @@
-package com.example.estonianpizzaaBE.exception;
+package com.example.estonianpizzaaBE.exception.payment;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 
