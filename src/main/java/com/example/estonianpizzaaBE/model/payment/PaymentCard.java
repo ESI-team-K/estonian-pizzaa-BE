@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.YearMonth;
 
 @Entity
 @Table(name = "payment_card")
@@ -19,12 +20,13 @@ public class PaymentCard {
 
     private String lastNumbers;
 
-    private String expirationDate;
+    private YearMonth expirationDate;
 
     private String cardHolderName;
 
     private CardType cardType;
 
     private String referenceNumber;
+
 }
 

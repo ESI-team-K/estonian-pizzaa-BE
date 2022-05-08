@@ -9,4 +9,8 @@ public class MenuItem {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
+
+    public Long getId() {
+        return id;
+    }
 }
