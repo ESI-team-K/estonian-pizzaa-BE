@@ -14,8 +14,6 @@ public class Driver {
     @Column(name = "name")
     private String name;
 
-<<<<<<< HEAD
-=======
     // public String getDriver_description() {
     // return advertisement_description;
     // }
@@ -24,26 +22,16 @@ public class Driver {
     // this.advertisement_description = advertisement_description;
     // }
 
->>>>>>> e41ac6ef6096df15e1cba6fbbb8e11466639a896
     @Column(name = "phone_number")
     private String phone_number;
 
     @Column(name = "status")
     private DriverStatus status;
 
-<<<<<<< HEAD
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "drivers")
-=======
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     }, mappedBy = "drivers")
->>>>>>> e41ac6ef6096df15e1cba6fbbb8e11466639a896
     @JsonIgnore
     private Set<Customer> customers = new HashSet<>();
 
@@ -63,22 +51,14 @@ public class Driver {
         return status;
     }
 
+    public DriverStatus setStatus() {
+        return status;
+    }
+
     public void setDriver_name(String name) {
         this.name = name;
     }
 
-<<<<<<< HEAD
-
-    public DriverStatus getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(DriverStatus status) {
-        this.status = status;
-    }
-
-=======
->>>>>>> e41ac6ef6096df15e1cba6fbbb8e11466639a896
     public Set<Customer> getCustomers() {
         return customers;
     }
