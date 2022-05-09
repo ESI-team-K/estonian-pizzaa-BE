@@ -38,6 +38,7 @@ public class Driver {
     public Driver() {
     }
 
+
     public long getId() {
         return id;
     }
@@ -50,6 +51,10 @@ public class Driver {
         return status;
     }
 
+    // public DriverStatus setStatus(DriverStatus status2) {
+    //     return status;
+    // }
+
     public void setDriver_name(String name) {
         this.name = name;
     }
@@ -60,5 +65,9 @@ public class Driver {
 
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
+    }
+
+
+    public void setStatus(DriverStatus status2) {
     }
 }
