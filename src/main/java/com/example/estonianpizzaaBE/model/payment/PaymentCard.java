@@ -3,10 +3,7 @@ package com.example.estonianpizzaaBE.model.payment;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.YearMonth;
 
 @Entity
@@ -16,6 +13,7 @@ import java.time.YearMonth;
 public class PaymentCard {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String lastNumbers;
