@@ -1,4 +1,4 @@
-package com.example.estonianpizzaaBE.model;
+package com.example.estonianpizzaaBE.model.order;
 
 public enum OrderType {
     ONSITE,
