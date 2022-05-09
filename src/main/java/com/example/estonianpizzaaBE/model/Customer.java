@@ -1,5 +1,5 @@
 package com.example.estonianpizzaaBE.model;
-import java.sql.Driver;
+import com.example.estonianpizzaaBE.model.Driver;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -45,10 +45,10 @@ public class Customer {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             })
-    @JoinTable(name = "users",
-            joinColumns = { @JoinColumn(name = "customer_id") },
-            inverseJoinColumns = { @JoinColumn(name = "driver_id") })
-    private Set<Driver> drivers = new HashSet<>();
+    @JoinTable(name = "delivery_users",
+            joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "driver_id", referencedColumnName = "id"))
+    private Set<com.example.estonianpizzaaBE.model.Driver> drivers = new HashSet<>();
 
     public Customer() {
     }
