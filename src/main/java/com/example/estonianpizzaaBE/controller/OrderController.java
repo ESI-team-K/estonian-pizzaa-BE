@@ -3,15 +3,18 @@ package com.example.estonianpizzaaBE.controller;
 import java.util.ArrayList;
 
 import com.example.estonianpizzaaBE.model.MenuItem;
-import com.example.estonianpizzaaBE.model.Order;
-import com.example.estonianpizzaaBE.model.OrderStatus;
-import com.example.estonianpizzaaBE.model.OrderType;
+import com.example.estonianpizzaaBE.model.order.Order;
+import com.example.estonianpizzaaBE.model.order.OrderStatus;
+import com.example.estonianpizzaaBE.model.order.OrderType;
+import com.example.estonianpizzaaBE.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,20 +26,27 @@ public class OrderController {
     static class OrderRequest {
         public OrderType type;
         public ArrayList<MenuItem> shoppingCart;
-        // public long customerId;
+        public long customerId;
     }
 
     @PostMapping("/order/create")
     public long createOrder(@RequestBody OrderRequest orderRequest) {
         OrderType type = orderRequest.type;
         ArrayList<MenuItem> cart = orderRequest.shoppingCart;
+        long customerId = orderRequest.customerId;
 
         if (type == null) {
             type = OrderType.DELIVERY;
         }
-        Order newOrder = new Order(OrderStatus.PENDING, type, cart);
+        Order newOrder = new Order(OrderStatus.PENDING, type, cart, customerId);
         orderService.saveOrder(newOrder);
         return newOrder.getOrderId();
+    }
+
+    @GetMapping("/order/{id}/")
+    public @ResponseBody Order getOrder(@PathVariable long id)
+    {
+        return orderService.fetchOrderById(id);
     }
 
     @PutMapping("/order/{id}/confirm")

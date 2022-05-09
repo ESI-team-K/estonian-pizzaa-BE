@@ -7,11 +7,12 @@ import com.example.estonianpizzaaBE.exception.ResourceNotFoundException;
 import com.example.estonianpizzaaBE.model.Delivery;
 import com.example.estonianpizzaaBE.model.DeliveryStatus;
 import com.example.estonianpizzaaBE.model.Driver;
-import com.example.estonianpizzaaBE.model.Order;
-import com.example.estonianpizzaaBE.model.OrderStatus;
+import com.example.estonianpizzaaBE.model.order.Order;
+import com.example.estonianpizzaaBE.model.order.OrderStatus;
 import com.example.estonianpizzaaBE.repository.DeliveryRepository;
 import com.example.estonianpizzaaBE.repository.DriverRepository;
 import com.example.estonianpizzaaBE.service.DeliveryService;
+import com.example.estonianpizzaaBE.service.OrderService;
 import com.example.estonianpizzaaBE.service.NotificationService;
 
 import org.springframework.beans.factory.annotation.Autowired;

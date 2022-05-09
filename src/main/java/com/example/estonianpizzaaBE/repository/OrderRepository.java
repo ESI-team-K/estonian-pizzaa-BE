@@ -2,8 +2,8 @@ package com.example.estonianpizzaaBE.repository;
 
 import java.util.List;
 
-import com.example.estonianpizzaaBE.model.Order;
-import com.example.estonianpizzaaBE.model.OrderStatus;
+import com.example.estonianpizzaaBE.model.order.Order;
+import com.example.estonianpizzaaBE.model.order.OrderStatus;
 
 import org.springframework.data.repository.CrudRepository;
 

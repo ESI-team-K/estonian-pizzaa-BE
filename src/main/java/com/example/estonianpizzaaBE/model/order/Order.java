@@ -1,4 +1,4 @@
-package com.example.estonianpizzaaBE.model;
+package com.example.estonianpizzaaBE.model.order;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -15,12 +15,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.example.estonianpizzaaBE.model.CancellationRequest;
+import com.example.estonianpizzaaBE.model.MenuItem;
+
+
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
+    @Column(name = "customerId")
+    private long customerId;
     @Column(name = "startDate")
     private Instant startDate;
     @Column(name = "endDate")
@@ -34,8 +40,6 @@ public class Order {
     private CancellationRequest cancellationRequest;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
-    @Column(name = "customerId")
-    private long customerId;
 
     public Order(long orderId,
             Instant startDate,
@@ -55,20 +59,21 @@ public class Order {
 
     public Order(OrderStatus status,
             OrderType type,
-            List<MenuItem> shoppingCart
-    // , long customerId
+            List<MenuItem> shoppingCart,
+            long customerId
     ) {
+        this.customerId = customerId;
         this.startDate = Instant.now();
         this.endDate = null;
         this.status = status;
         this.type = type;
         this.cancellationRequest = null;
-        List<CartItem> cartItems = new ArrayList<CartItem>();
-        for (MenuItem item : shoppingCart) {
-            cartItems.add(new CartItem(item));
+        this.cartItems = new ArrayList<CartItem>();
+        for (MenuItem item : shoppingCart) 
+        {
+            CartItem cartItem = new CartItem(item, this);
+            this.cartItems.add(cartItem);
         }
-        this.cartItems = cartItems;
-        // this.customerId = customerId;
     }
 
     public long getOrderId() {
@@ -126,6 +131,24 @@ public class Order {
     public void setStartDate(Instant startDate) {
         this.startDate = startDate;
     }
+    
+    public List<CartItem> getCartItems() {
+        return this.cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+
+    public long getCustomerId() {
+        return this.customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
+
 
     public Order() {
         this.startDate = Instant.now();
@@ -134,4 +157,5 @@ public class Order {
         this.type = null;
         this.cancellationRequest = null;
     }
+    
 }
