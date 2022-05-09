@@ -28,8 +28,9 @@ public class Delivery {
     private String recipientName;
     private String recipientPhoneNumber;
     private String recipientAddress;
-    // TODO: Enum
-    private String deliveryStatus;
+
+    @Column(name = "status")
+    private DeliveryStatus status;
 
     public Delivery() {
     }
@@ -43,7 +44,7 @@ public class Delivery {
         this.recipientName = recipientName;
         this.recipientPhoneNumber = recipientPhoneNumber;
         this.recipientAddress = recipientAddress;
-        this.deliveryStatus = "Waiting for a delivery person";
+        this.status = DeliveryStatus.READY;
     }
 
     public long getId() {
@@ -78,7 +79,11 @@ public class Delivery {
         return recipientAddress;
     }
 
-    public String getStatus() {
-        return deliveryStatus;
+    public DeliveryStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DeliveryStatus status) {
+        this.status = status;
     }
 }
