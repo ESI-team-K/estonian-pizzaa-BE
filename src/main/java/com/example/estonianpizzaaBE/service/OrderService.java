@@ -7,8 +7,6 @@ import java.util.List;
 import com.example.estonianpizzaaBE.model.CancellationRequest;
 import com.example.estonianpizzaaBE.model.order.Order;
 import com.example.estonianpizzaaBE.model.order.OrderStatus;
-import com.example.estonianpizzaaBE.repository.CartItemRepository;
-import com.example.estonianpizzaaBE.repository.MenuItemRepository;
 import com.example.estonianpizzaaBE.repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +17,6 @@ public class OrderService {
     
     @Autowired 
     private OrderRepository orderRepository;
-
-    @Autowired 
-    private MenuItemRepository menuItemRepository;
-    
-    @Autowired 
-    private CartItemRepository cartItemRepository;
     
     public List<Order> getAllOrders(){
         List<Order> orders = new ArrayList<>();
