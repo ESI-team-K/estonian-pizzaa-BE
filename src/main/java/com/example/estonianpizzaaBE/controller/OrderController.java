@@ -23,7 +23,7 @@ public class OrderController {
     static class OrderRequest {
         public OrderType type;
         public ArrayList<MenuItem> shoppingCart;
-        public long customerId;
+        // public long customerId;
     }
 
     @PostMapping("/order/create")
@@ -34,7 +34,7 @@ public class OrderController {
         if (type == null) {
             type = OrderType.DELIVERY;
         }
-        Order newOrder = new Order(OrderStatus.PENDING, type, cart, 0);
+        Order newOrder = new Order(OrderStatus.PENDING, type, cart);
         orderService.saveOrder(newOrder);
         return newOrder.getOrderId();
     }

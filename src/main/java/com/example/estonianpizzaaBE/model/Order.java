@@ -55,7 +55,9 @@ public class Order {
 
     public Order(OrderStatus status,
             OrderType type,
-            List<MenuItem> shoppingCart, long customerId) {
+            List<MenuItem> shoppingCart
+    // , long customerId
+    ) {
         this.startDate = Instant.now();
         this.endDate = null;
         this.status = status;
@@ -66,7 +68,7 @@ public class Order {
             cartItems.add(new CartItem(item));
         }
         this.cartItems = cartItems;
-        this.customerId = customerId;
+        // this.customerId = customerId;
     }
 
     public long getOrderId() {
@@ -101,13 +103,13 @@ public class Order {
         this.type = type;
     }
 
-    public long getCustomerId() {
-        return this.customerId;
-    }
+    // public long getCustomerId() {
+    // return this.customerId;
+    // }
 
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
+    // public void setCustomerId(long customerId) {
+    // this.customerId = customerId;
+    // }
 
     public CancellationRequest getCancellationRequest() {
         return this.cancellationRequest;
