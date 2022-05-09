@@ -1,12 +1,12 @@
-package com.example.estonianpizzaaBE.controller;
+package com.example.estonianpizzaaBE.service;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.estonianpizzaaBE.model.CancellationRequest;
-import com.example.estonianpizzaaBE.model.Order;
-import com.example.estonianpizzaaBE.model.OrderStatus;
+import com.example.estonianpizzaaBE.model.order.Order;
+import com.example.estonianpizzaaBE.model.order.OrderStatus;
 import com.example.estonianpizzaaBE.repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,12 @@ public class OrderService {
     {
         return orderRepository.findById(id).get();
     }
+    
+    // public List<MenuItem> fetchCartByOrderId(Long id)
+    // {
+    //     Order order = orderRepository.findById(id).get();
+    //     return order.get
+    // }
 
     public void updateOrderStatus(Long id, OrderStatus status)
     {
