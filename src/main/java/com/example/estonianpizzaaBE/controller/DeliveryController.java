@@ -8,7 +8,9 @@ import com.example.estonianpizzaaBE.model.Delivery;
 import com.example.estonianpizzaaBE.model.DeliveryStatus;
 import com.example.estonianpizzaaBE.model.OrderStatus;
 import com.example.estonianpizzaaBE.repository.DeliveryRepository;
+import com.example.estonianpizzaaBE.repository.DriverRepository;
 import com.example.estonianpizzaaBE.service.DeliveryService;
+import com.example.estonianpizzaaBE.service.NotificationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,12 +31,18 @@ public class DeliveryController {
     DeliveryRepository deliveryRepository;
 
     @Autowired
+    DriverRepository driverRepository;
+
+    @Autowired
     private DeliveryService deliveryService;
 
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("delivery/{id}")
+    @Autowired
+    private NotificationService notificationService;
+
+    @GetMapping("/delivery/{id}")
     public ResponseEntity<Delivery> getById(@PathVariable("id") long id) {
         Delivery delivery = deliveryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found id = " + id));
@@ -53,7 +61,9 @@ public class DeliveryController {
 
     @PostMapping("/order/{id}/delivery")
     public ResponseEntity<Delivery> create(@RequestBody Delivery delivery, @PathVariable long id) {
-        // TODO: check first if it already create
+        // TODO: can improve by check first if it already create
+
+        // notificationService.sendNotification(userId);
         Delivery _delivery = deliveryRepository
                 .save(new Delivery(delivery.getDriverId(), id, delivery.getEstimateDeliveryTime(),
                         delivery.getRecipientName(), delivery.getRecipientPhoneNumber(),
@@ -61,19 +71,20 @@ public class DeliveryController {
         return new ResponseEntity<>(_delivery, HttpStatus.CREATED);
     }
 
-    // TODO: add verify status
+    // TODO: can add verify status
     @PutMapping("/order/{id}/outForDelivery")
     public void outForDelivery(@PathVariable long id) {
         Delivery _delivery = deliveryRepository.findByOrderId(id);
         deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.DISPATCHED);
         orderService.updateOrderStatus(id, OrderStatus.DELIVERING);
+        // notificationService.sendNotification(userId);
     }
 
     @PutMapping("/order/{id}/delivered")
     public void delivered(@PathVariable long id) {
         Delivery _delivery = deliveryRepository.findByOrderId(id);
         deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.DELIVERED);
-        orderService.updateOrderStatus(id, OrderStatus.FULFILLED);
+        orderService.fulfillOrder(id);
     }
 
     // or delete, since need to assign new driver
