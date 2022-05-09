@@ -19,12 +19,18 @@ public class Address {
     @Column(name = "postal_code")
     public long postal_code;
 
+    public Address() {
+
+    }
+
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
+
     public long getHouse_number() {
         return house_number;
     }
