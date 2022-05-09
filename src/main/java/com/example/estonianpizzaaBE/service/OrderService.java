@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.estonianpizzaaBE.model.CancellationRequest;
-import com.example.estonianpizzaaBE.model.Order;
-import com.example.estonianpizzaaBE.model.OrderStatus;
+import com.example.estonianpizzaaBE.model.order.Order;
+import com.example.estonianpizzaaBE.model.order.OrderStatus;
 import com.example.estonianpizzaaBE.repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

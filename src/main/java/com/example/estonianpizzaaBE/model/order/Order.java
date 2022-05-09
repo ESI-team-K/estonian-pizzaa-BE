@@ -1,4 +1,4 @@
-package com.example.estonianpizzaaBE.model;
+package com.example.estonianpizzaaBE.model.order;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.example.estonianpizzaaBE.model.CancellationRequest;
+import com.example.estonianpizzaaBE.model.MenuItem;
 
 
 @Entity

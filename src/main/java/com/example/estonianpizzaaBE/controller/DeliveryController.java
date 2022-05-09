@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.estonianpizzaaBE.exception.ResourceNotFoundException;
 import com.example.estonianpizzaaBE.model.Delivery;
 import com.example.estonianpizzaaBE.model.DeliveryStatus;
-import com.example.estonianpizzaaBE.model.OrderStatus;
+import com.example.estonianpizzaaBE.model.order.OrderStatus;
 import com.example.estonianpizzaaBE.repository.DeliveryRepository;
 import com.example.estonianpizzaaBE.service.DeliveryService;
 import com.example.estonianpizzaaBE.service.OrderService;

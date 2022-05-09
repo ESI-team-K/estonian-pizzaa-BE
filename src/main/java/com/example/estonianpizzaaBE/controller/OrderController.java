@@ -4,9 +4,9 @@ package com.example.estonianpizzaaBE.controller;
 import java.util.ArrayList;
 
 import com.example.estonianpizzaaBE.model.MenuItem;
-import com.example.estonianpizzaaBE.model.Order;
-import com.example.estonianpizzaaBE.model.OrderStatus;
-import com.example.estonianpizzaaBE.model.OrderType;
+import com.example.estonianpizzaaBE.model.order.Order;
+import com.example.estonianpizzaaBE.model.order.OrderStatus;
+import com.example.estonianpizzaaBE.model.order.OrderType;
 import com.example.estonianpizzaaBE.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
