@@ -1,5 +1,7 @@
 package com.example.estonianpizzaaBE.service;
 
+import java.time.Instant;
+
 import com.example.estonianpizzaaBE.exception.ResourceNotFoundException;
 import com.example.estonianpizzaaBE.model.Delivery;
 import com.example.estonianpizzaaBE.model.DeliveryStatus;
@@ -23,6 +25,9 @@ public class DeliveryService {
         Delivery delivery = deliveryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found id = " + id));
         delivery.setStatus(status);
+        if (status == DeliveryStatus.DELIVERED) {
+            delivery.setEndDeliveryTime(Instant.now());
+        }
         deliveryRepository.save(delivery);
     }
 
