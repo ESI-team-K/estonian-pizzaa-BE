@@ -1,9 +1,10 @@
 package com.example.estonianpizzaaBE.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "drivers")
@@ -13,14 +14,6 @@ public class Driver {
     private long id;
     @Column(name = "name")
     private String name;
-
-    // public String getDriver_description() {
-    // return advertisement_description;
-    // }
-
-    // public void setAdvertisement_description(String advertisement_description) {
-    // this.advertisement_description = advertisement_description;
-    // }
 
     @Column(name = "phone_number")
     private String phone_number;
@@ -47,27 +40,23 @@ public class Driver {
         return name;
     }
 
-    public DriverStatus getStatus() {
-        return status;
-    }
-
-    // public DriverStatus setStatus(DriverStatus status2) {
-    //     return status;
-    // }
 
     public void setDriver_name(String name) {
         this.name = name;
     }
 
+    public DriverStatus getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(DriverStatus status) {
+        this.status = status;
+    }
     public Set<Customer> getCustomers() {
         return customers;
     }
 
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
-    }
-
-
-    public void setStatus(DriverStatus status2) {
     }
 }
