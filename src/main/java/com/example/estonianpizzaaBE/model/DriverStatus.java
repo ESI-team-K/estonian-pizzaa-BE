@@ -1,6 +1,6 @@
 package com.example.estonianpizzaaBE.model;
 
 public enum DriverStatus {
-    AVAILABLE,
-    BUSY
+    BUSY,
+    AVAILABLE
 }
