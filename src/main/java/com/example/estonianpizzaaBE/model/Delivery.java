@@ -15,6 +15,9 @@ public class Delivery {
     @Column(name = "driverId")
     private long driverId;
 
+    @Column(name = "orderId")
+    private long orderId;
+
     @Column(name = "estimateDeliveryTime")
     private long estimateDeliveryTime; // minute
 
@@ -35,9 +38,10 @@ public class Delivery {
     public Delivery() {
     }
 
-    public Delivery(long driverId, long estimateDeliveryTime, String recipientName,
+    public Delivery(long driverId, long orderId, long estimateDeliveryTime, String recipientName,
             String recipientPhoneNumber, String recipientAddress) {
         this.driverId = driverId;
+        this.orderId = orderId;
         this.estimateDeliveryTime = estimateDeliveryTime;
         this.startDeliveryTime = Instant.now();
         this.endDeliveryTime = null;
@@ -53,6 +57,10 @@ public class Delivery {
 
     public long getDriverId() {
         return driverId;
+    }
+
+    public long getOrderId() {
+        return orderId;
     }
 
     public long getEstimateDeliveryTime() {

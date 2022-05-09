@@ -51,20 +51,37 @@ public class DeliveryController {
         return new ResponseEntity<>(delivery, HttpStatus.OK);
     }
 
-    // TODO: will become order/{id}/delivery
-    @PostMapping("/deliveries")
-    public ResponseEntity<Delivery> create(@RequestBody Delivery delivery) {
+    @PostMapping("/order/{id}/delivery")
+    public ResponseEntity<Delivery> create(@RequestBody Delivery delivery, @PathVariable long id) {
+        // TODO: check first if it already create
         Delivery _delivery = deliveryRepository
-                .save(new Delivery(delivery.getDriverId(), delivery.getEstimateDeliveryTime(),
+                .save(new Delivery(delivery.getDriverId(), id, delivery.getEstimateDeliveryTime(),
                         delivery.getRecipientName(), delivery.getRecipientPhoneNumber(),
                         delivery.getRecipientAddress()));
         return new ResponseEntity<>(_delivery, HttpStatus.CREATED);
     }
 
-    @PutMapping("/delivery/{id}/dispatching")
-    public void confirmOrder(@PathVariable long id) {
-        deliveryService.updateDeliveryStatus(id, DeliveryStatus.DISPATCHED);
+    // TODO: add verify status
+    @PutMapping("/order/{id}/outForDelivery")
+    public void outForDelivery(@PathVariable long id) {
+        Delivery _delivery = deliveryRepository.findByOrderId(id);
+        deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.DISPATCHED);
         orderService.updateOrderStatus(id, OrderStatus.DELIVERING);
+    }
+
+    @PutMapping("/order/{id}/delivered")
+    public void delivered(@PathVariable long id) {
+        Delivery _delivery = deliveryRepository.findByOrderId(id);
+        deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.DELIVERED);
+        orderService.updateOrderStatus(id, OrderStatus.FULFILLED);
+    }
+
+    // or delete, since need to assign new driver
+    @PutMapping("/order/{id}/rejectDelivery")
+    public void rejectDelivery(@PathVariable long id) {
+        Delivery _delivery = deliveryRepository.findByOrderId(id);
+        deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.READY);
+        orderService.updateOrderStatus(id, OrderStatus.CONFIRMED);
     }
 
     // Deliver can be deleted and assign to a new driver
