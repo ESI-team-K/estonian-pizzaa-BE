@@ -1,34 +1,38 @@
 package com.example.estonianpizzaaBE.model;
 
 import java.time.Instant;
+import javax.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name = "notification")
+@Getter
+@Setter
 public class Notification {
 
-    private final long notificationId;
-    private final long notifyUserId;
-    private final String message;
-    private final Instant notifyDateTime;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public Notification(long notificationId, long notifyUserId, String message) {
-        this.notificationId = notificationId;
-        this.notifyUserId = notifyUserId;
+    @Column(name = "userId")
+    private long userId;
+
+    @Column(name = "message")
+    private String message;
+
+    @Column(name = "notifyDateTime")
+    private Instant notifyDateTime;
+
+    public Notification() {
+    }
+
+    public Notification(long id, long notifyUserId, String message) {
+        this.id = id;
+        this.userId = notifyUserId;
         this.message = message;
         this.notifyDateTime = Instant.now();
     }
 
-    public long getId() {
-        return notificationId;
-    }
-
-    public long getNotifyUserId() {
-        return notifyUserId;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public Instant getNotifyDateTime() {
-        return notifyDateTime;
-    }
 }
