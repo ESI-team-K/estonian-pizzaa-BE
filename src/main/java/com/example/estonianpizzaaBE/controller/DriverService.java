@@ -30,7 +30,7 @@ public class DriverService {
     public void updateDriverStatus(Long id, DriverStatus status)
     {
         Driver driver = fetchDriverById(id);
-        driver.setStatus(status);
+        // driver.setStatus(status);
         DriverRepository.save(driver);
     }
     
