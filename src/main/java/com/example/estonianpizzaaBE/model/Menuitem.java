@@ -1,48 +1,16 @@
 package com.example.estonianpizzaaBE.model;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Entity
-@Table(name = "menuitems")
-public class Menuitem {
-
-
+public class MenuItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public long id;
-    @Column(name = "name")
-    public String name;
-    @Column(name = "ingredients")
-    public String ingredients;
-    @Column(name = "size")
-    public long size;
-    @Column(name = "price")
-    public long price;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String name() {
-        return name;
-    }
-
-    public void name(String name) {
-        this.name = name;
-    }
-
-    public String getIngredients() {
-        return ingredients;
-    }
-
-
-    public long getSize() {
-        return size;
-    }
-
-    public long getPrice() {
-        return price;
-    }
-
-   
 }
