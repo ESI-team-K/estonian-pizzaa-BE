@@ -1,6 +1,5 @@
 package com.example.estonianpizzaaBE.controller;
 
-
 import java.util.ArrayList;
 
 import com.example.estonianpizzaaBE.model.MenuItem;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class OrderController {
 
@@ -25,41 +23,43 @@ public class OrderController {
     static class OrderRequest {
         public OrderType type;
         public ArrayList<MenuItem> shoppingCart;
+        public long customerId;
     }
 
-	@PostMapping("/order/create")
-	public long createOrder(@RequestBody OrderRequest orderRequest){
+    @PostMapping("/order/create")
+    public long createOrder(@RequestBody OrderRequest orderRequest) {
         OrderType type = orderRequest.type;
         ArrayList<MenuItem> cart = orderRequest.shoppingCart;
 
-        if (type == null) { type = OrderType.DELIVERY; }
-        Order newOrder = new Order(OrderStatus.PENDING, type, cart);
+        if (type == null) {
+            type = OrderType.DELIVERY;
+        }
+        Order newOrder = new Order(OrderStatus.PENDING, type, cart, 0);
         orderService.saveOrder(newOrder);
         return newOrder.getOrderId();
-	}
+    }
 
     @PutMapping("/order/{id}/confirm")
-    public void confirmOrder(@PathVariable long id)
-    {
+    public void confirmOrder(@PathVariable long id) {
         orderService.updateOrderStatus(id, OrderStatus.CONFIRMED);
     }
 
     @PutMapping("/order/{id}/cancel")
-    public void sendCancellationRequest(@PathVariable long id)
-    {
-        orderService.sendCancellationRequest(id);;
+    public void sendCancellationRequest(@PathVariable long id) {
+        orderService.sendCancellationRequest(id);
+        ;
     }
 
     @PutMapping("/order/{id}/cancel/approve")
-    public void approveCancellationRequest(@PathVariable long id)
-    {
-        orderService.approveCancellationRequest(id);;
+    public void approveCancellationRequest(@PathVariable long id) {
+        orderService.approveCancellationRequest(id);
+        ;
     }
 
-    public void updateOrderStatus(long id, OrderStatus status) // If needed, this is available for any other status updates
+    public void updateOrderStatus(long id, OrderStatus status) // If needed, this is available for any other status
+                                                               // updates
     {
         orderService.updateOrderStatus(id, status);
     }
-
 
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import com.example.estonianpizzaaBE.exception.ResourceNotFoundException;
 import com.example.estonianpizzaaBE.model.Delivery;
 import com.example.estonianpizzaaBE.model.DeliveryStatus;
+import com.example.estonianpizzaaBE.model.Driver;
+import com.example.estonianpizzaaBE.model.Order;
 import com.example.estonianpizzaaBE.model.OrderStatus;
 import com.example.estonianpizzaaBE.repository.DeliveryRepository;
 import com.example.estonianpizzaaBE.repository.DriverRepository;
@@ -63,9 +65,13 @@ public class DeliveryController {
     public ResponseEntity<Delivery> create(@RequestBody Delivery delivery, @PathVariable long id) {
         // TODO: can improve by check first if it already create
 
-        // notificationService.sendNotification(userId);
+        Driver _driver = deliveryService.findAvailableDriver();
+        // Assume there is always a driver
+        long driverId = ((_driver == null) ? 0 : _driver.getId());
+
+        notificationService.sendNotification(driverId, "driver");
         Delivery _delivery = deliveryRepository
-                .save(new Delivery(delivery.getDriverId(), id, delivery.getEstimateDeliveryTime(),
+                .save(new Delivery(driverId, id, delivery.getEstimateDeliveryTime(),
                         delivery.getRecipientName(), delivery.getRecipientPhoneNumber(),
                         delivery.getRecipientAddress()));
         return new ResponseEntity<>(_delivery, HttpStatus.CREATED);
@@ -74,10 +80,11 @@ public class DeliveryController {
     // TODO: can add verify status
     @PutMapping("/order/{id}/outForDelivery")
     public void outForDelivery(@PathVariable long id) {
+        Order _order = orderService.fetchOrderById(id);
         Delivery _delivery = deliveryRepository.findByOrderId(id);
         deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.DISPATCHED);
         orderService.updateOrderStatus(id, OrderStatus.DELIVERING);
-        // notificationService.sendNotification(userId);
+        notificationService.sendNotification(_order.getCustomerId(), "customer");
     }
 
     @PutMapping("/order/{id}/delivered")
@@ -102,9 +109,9 @@ public class DeliveryController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // @DeleteMapping("/deliveries")
-    // public ResponseEntity<HttpStatus> deleteAll() {
-    // deliveryRepository.deleteAll();
-    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    // }
+    @DeleteMapping("/deliveries")
+    public ResponseEntity<HttpStatus> deleteAll() {
+        deliveryRepository.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
