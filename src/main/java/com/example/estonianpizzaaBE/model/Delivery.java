@@ -4,9 +4,13 @@ import java.time.Instant;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "delivery")
+@Getter
+@Setter
 public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,47 +55,4 @@ public class Delivery {
         this.status = DeliveryStatus.READY;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public long getDriverId() {
-        return driverId;
-    }
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public long getEstimateDeliveryTime() {
-        return estimateDeliveryTime;
-    }
-
-    public Instant getStartDeliveryTime() {
-        return startDeliveryTime;
-    }
-
-    public Instant getEndDeliveryTime() {
-        return endDeliveryTime;
-    }
-
-    public String getRecipientName() {
-        return recipientName;
-    }
-
-    public String getRecipientPhoneNumber() {
-        return recipientPhoneNumber;
-    }
-
-    public String getRecipientAddress() {
-        return recipientAddress;
-    }
-
-    public DeliveryStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(DeliveryStatus status) {
-        this.status = status;
-    }
 }

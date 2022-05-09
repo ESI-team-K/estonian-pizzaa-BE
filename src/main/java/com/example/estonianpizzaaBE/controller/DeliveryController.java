@@ -70,7 +70,7 @@ public class DeliveryController {
         // Assume there is always a driver
         long driverId = ((_driver == null) ? 0 : _driver.getId());
 
-        // notificationService.sendNotification(driverId, "driver");
+        notificationService.sendNotification(driverId, "driver");
         Delivery _delivery = deliveryRepository
                 .save(new Delivery(driverId, id, delivery.getEstimateDeliveryTime(),
                         delivery.getRecipientName(), delivery.getRecipientPhoneNumber(),
@@ -85,7 +85,7 @@ public class DeliveryController {
         Delivery _delivery = deliveryRepository.findByOrderId(id);
         deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.DISPATCHED);
         orderService.updateOrderStatus(id, OrderStatus.DELIVERING);
-        // notificationService.sendNotification(_order.getCustomerId(), "customer");
+        notificationService.sendNotification(_order.getCustomerId(), "customer");
     }
 
     @PutMapping("/order/{id}/delivered")
