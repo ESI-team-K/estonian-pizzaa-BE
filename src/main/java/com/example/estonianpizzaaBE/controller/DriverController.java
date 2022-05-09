@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.estonianpizzaaBE.exception.ResourceNotFoundException;
 import com.example.estonianpizzaaBE.model.Driver;
+import com.example.estonianpizzaaBE.model.DriverStatus;
 import com.example.estonianpizzaaBE.model.Customer;
 import com.example.estonianpizzaaBE.repository.DriverRepository;
 import com.example.estonianpizzaaBE.repository.CustomerRepository;
-@CrossOrigin(origins = "http://localhost:8081")
+
 @RestController
 @RequestMapping("/api")
 public class DriverController {
@@ -18,6 +19,8 @@ public class DriverController {
     private CustomerRepository customerRepository;
     @Autowired
     private DriverRepository driverRepository;
+    @Autowired
+    private DriverService driverService;
     @GetMapping("/drivers")
     public ResponseEntity<List<Driver>> getAllDrivers() {
         List<Driver> drivers = new ArrayList<Driver>();
@@ -28,14 +31,6 @@ public class DriverController {
         return new ResponseEntity<>(drivers, HttpStatus.OK);
     }
 
-    // @GetMapping("/customers/{customerId}/drivers")
-    // public ResponseEntity<List<Driver>> getAllDriversByCustomerId(@PathVariable(value = "customerId") Long customerId) {
-    //     if (!customerRepository.existsById(customerId)) {
-    //         throw new ResourceNotFoundException("Not found Customer with id = " + customerId);
-    //     }
-    //     List<Driver> tags = driverRepository.findDriverByCustomersId(customerId);
-    //     return new ResponseEntity<>(tags, HttpStatus.OK);
-    // }
     @GetMapping("/drivers/{id}")
     public ResponseEntity<Driver> getDriversById(@PathVariable(value = "id") Long id) {
         Driver driver = driverRepository.findById(id)
@@ -43,14 +38,7 @@ public class DriverController {
         return new ResponseEntity<>(driver, HttpStatus.OK);
     }
 
-    // @GetMapping("/drivers/{driversId}/customers")
-    // public ResponseEntity<List<Customer>> getAllCustomersByDriversId(@PathVariable(value = "driversId") Long driverId) {
-    //     if (!driverRepository.existsById(driverId)) {
-    //         throw new ResourceNotFoundException("Not found Driver  with id = " + driverId);
-    //     }
-    //     List<Customer> customers = customerRepository.findCustomersByDriversId(driverId);
-    //     return new ResponseEntity<>(customers, HttpStatus.OK);
-    // }
+
     @PostMapping("/customers/{customerId}/drivers")
     public ResponseEntity<Driver> addDriver(@PathVariable(value = "customerId") Long customerId, @RequestBody Driver driverRequest) {
         Driver driver = customerRepository.findById(customerId).map(customer -> {
@@ -95,5 +83,26 @@ public class DriverController {
         driverRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
+    @PutMapping("/driver/{id}/available")
+    public void availableDriver(@PathVariable long id)
+    {
+        driverService.updateDriverStatus(id, DriverStatus.AVAILABLE);
+    }
+
+    @PutMapping("/driver/{id}/busy")
+    public void busyDriver(@PathVariable long id)
+    {
+        driverService.updateDriverStatus(id, DriverStatus.BUSY);;
+    }
+
+    public void updateDriverStatus(long id, DriverStatus status) 
+    {
+        driverService.updateDriverStatus(id, status);
+    }
+
+
+
 }
 

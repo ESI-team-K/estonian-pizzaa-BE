@@ -32,7 +32,6 @@ public class Customer {
     @Column(name = "phone_number")
     public String phone_number;
 
-    
     public Long getId() {
         return id;
     }
@@ -80,6 +79,19 @@ public class Customer {
             inverseJoinColumns = { @JoinColumn(name = "driver_id") })
     private Set<Driver> drivers = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "customer_roles",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(Set<Role> roles2) {
+        this.roles = roles2;
+    }
+
     public Customer() {
     }
 
@@ -105,8 +117,4 @@ public class Customer {
         ((com.example.estonianpizzaaBE.model.Driver) driver).getCustomers().remove(this);
     }
 
-    @Override
-    public String toString() {
-        return "Customer [id=" + id + ", name=" + username + ", phone=" + phone_number + "]";
-    }
 }

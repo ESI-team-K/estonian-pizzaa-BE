@@ -12,19 +12,11 @@ public class Driver {
     @Column(name = "name")
     private String name;
 
-    // public String getDriver_description() {
-    //     return advertisement_description;
-    // }
-
-    // public void setAdvertisement_description(String advertisement_description) {
-    //     this.advertisement_description = advertisement_description;
-    // }
-
     @Column(name = "phone_number")
     private String phone_number;
 
     @Column(name = "status")
-    private String status;
+    private DriverStatus status;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -37,6 +29,7 @@ public class Driver {
     public Driver() {
     }
 
+
     public long getId() {
         return id;
     }
@@ -46,6 +39,16 @@ public class Driver {
     public void setDriver_name(String name) {
         this.name = name;
     }
+
+
+    public DriverStatus getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(DriverStatus status) {
+        this.status = status;
+    }
+
     public Set<Customer> getCustomers() {
         return customers;
     }

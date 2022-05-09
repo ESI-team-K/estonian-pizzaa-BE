@@ -1,5 +1,5 @@
 package com.example.estonianpizzaaBE.payload.response;
-
+import java.util.List;
 
 public class jwtResponse {
   private String token;
@@ -8,13 +8,15 @@ public class jwtResponse {
   private String username;
   private String email;
   private String phone_number;
+  private List<String> roles;
 
-  public jwtResponse(String accessToken, Long id, String username, String email, String phone) {
+  public jwtResponse(String accessToken, Long id, String username, String email, String phone, List<String> roles) {
     this.token = accessToken;
     this.id = id;
     this.username = username;
     this.email = email;
     this.phone_number = phone;
+    this.roles = roles;
 
   }
 
@@ -64,6 +66,10 @@ public class jwtResponse {
 
   public void setPhone_number(String phone_number) {
     this.phone_number = phone_number;
+  }
+
+  public List<String> getRoles() {
+    return roles;
   }
 
  
