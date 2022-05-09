@@ -15,34 +15,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
-    @Column(name="startDate")
+    @Column(name = "startDate")
     private Instant startDate;
-    @Column(name="endDate")
+    @Column(name = "endDate")
     private Instant endDate;
-    @Column(name="status")
+    @Column(name = "status")
     private OrderStatus status;
-    @Column(name="type")
+    @Column(name = "type")
     private OrderType type;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cancellation_id", referencedColumnName = "id")
     private CancellationRequest cancellationRequest;
-    @OneToMany(mappedBy="order", cascade = CascadeType.ALL) 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
+    @Column(name = "customerId")
+    private long customerId;
 
-    public Order(long orderId, 
-                 Instant startDate, 
-                 Instant endDate, 
-                 OrderStatus status, 
-                 OrderType type,
-                 CancellationRequest cancellationRequest,
-                 List<CartItem> cartItems) {
+    public Order(long orderId,
+            Instant startDate,
+            Instant endDate,
+            OrderStatus status,
+            OrderType type,
+            CancellationRequest cancellationRequest,
+            List<CartItem> cartItems) {
         this.orderId = orderId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -52,31 +53,31 @@ public class Order {
         this.cartItems = cartItems;
     }
 
-    public Order(OrderStatus status, 
-                 OrderType type,
-                 List<MenuItem> shoppingCart) {
+    public Order(OrderStatus status,
+            OrderType type,
+            List<MenuItem> shoppingCart
+    // , long customerId
+    ) {
         this.startDate = Instant.now();
         this.endDate = null;
         this.status = status;
         this.type = type;
         this.cancellationRequest = null;
         List<CartItem> cartItems = new ArrayList<CartItem>();
-        for (MenuItem item : shoppingCart) 
-        {
+        for (MenuItem item : shoppingCart) {
             cartItems.add(new CartItem(item));
         }
         this.cartItems = cartItems;
+        // this.customerId = customerId;
     }
 
     public long getOrderId() {
         return this.orderId;
     }
 
-
     public Instant getStartDate() {
         return this.startDate;
     }
-
 
     public Instant getEndDate() {
         return this.endDate;
@@ -101,7 +102,15 @@ public class Order {
     public void setType(OrderType type) {
         this.type = type;
     }
-    
+
+    // public long getCustomerId() {
+    // return this.customerId;
+    // }
+
+    // public void setCustomerId(long customerId) {
+    // this.customerId = customerId;
+    // }
+
     public CancellationRequest getCancellationRequest() {
         return this.cancellationRequest;
     }
@@ -109,10 +118,11 @@ public class Order {
     public void setCancellationRequest(CancellationRequest cancellationRequest) {
         this.cancellationRequest = cancellationRequest;
     }
-    
+
     public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
+
     public void setStartDate(Instant startDate) {
         this.startDate = startDate;
     }
