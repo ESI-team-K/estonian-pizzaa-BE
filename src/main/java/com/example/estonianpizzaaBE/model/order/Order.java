@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import com.example.estonianpizzaaBE.model.CancellationRequest;
 import com.example.estonianpizzaaBE.model.MenuItem;
 
-
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -60,8 +59,7 @@ public class Order {
     public Order(OrderStatus status,
             OrderType type,
             List<MenuItem> shoppingCart,
-            long customerId
-    ) {
+            long customerId) {
         this.customerId = customerId;
         this.startDate = Instant.now();
         this.endDate = null;
@@ -69,8 +67,7 @@ public class Order {
         this.type = type;
         this.cancellationRequest = null;
         this.cartItems = new ArrayList<CartItem>();
-        for (MenuItem item : shoppingCart) 
-        {
+        for (MenuItem item : shoppingCart) {
             CartItem cartItem = new CartItem(item, this);
             this.cartItems.add(cartItem);
         }
@@ -108,14 +105,6 @@ public class Order {
         this.type = type;
     }
 
-    // public long getCustomerId() {
-    // return this.customerId;
-    // }
-
-    // public void setCustomerId(long customerId) {
-    // this.customerId = customerId;
-    // }
-
     public CancellationRequest getCancellationRequest() {
         return this.cancellationRequest;
     }
@@ -131,7 +120,7 @@ public class Order {
     public void setStartDate(Instant startDate) {
         this.startDate = startDate;
     }
-    
+
     public List<CartItem> getCartItems() {
         return this.cartItems;
     }
@@ -139,7 +128,6 @@ public class Order {
     public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
-
 
     public long getCustomerId() {
         return this.customerId;
@@ -149,7 +137,6 @@ public class Order {
         this.customerId = customerId;
     }
 
-
     public Order() {
         this.startDate = Instant.now();
         this.endDate = null;
@@ -157,5 +144,5 @@ public class Order {
         this.type = null;
         this.cancellationRequest = null;
     }
-    
+
 }

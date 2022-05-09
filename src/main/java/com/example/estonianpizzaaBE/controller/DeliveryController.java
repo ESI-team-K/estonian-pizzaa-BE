@@ -85,7 +85,7 @@ public class DeliveryController {
         Delivery _delivery = deliveryRepository.findByOrderId(id);
         deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.DISPATCHED);
         orderService.updateOrderStatus(id, OrderStatus.DELIVERING);
-        // notificationService.sendNotification(_order.getCustomerId(), "customer");
+        notificationService.sendNotification(_order.getCustomerId(), "customer");
     }
 
     @PutMapping("/order/{id}/delivered")
