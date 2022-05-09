@@ -69,7 +69,7 @@ public class DeliveryController {
         // Assume there is always a driver
         long driverId = ((_driver == null) ? 0 : _driver.getId());
 
-        // notificationService.sendNotification(driverId, "driver");
+        notificationService.sendNotification(driverId, "driver");
         Delivery _delivery = deliveryRepository
                 .save(new Delivery(driverId, id, delivery.getEstimateDeliveryTime(),
                         delivery.getRecipientName(), delivery.getRecipientPhoneNumber(),
