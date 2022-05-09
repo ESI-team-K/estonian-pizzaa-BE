@@ -1,6 +1,8 @@
 package com.example.estonianpizzaaBE.model;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,8 +31,11 @@ public class Order {
     @Column(name="type")
     private OrderType type;
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cancellation_id", referencedColumnName = "id")
     private CancellationRequest cancellationRequest;
-    //TODO: add list of menu items
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderItem_id")
+    private List<MenuItem> orderItems = new ArrayList<>();
 
     public Order(long orderId, 
                  Instant startDate, 
