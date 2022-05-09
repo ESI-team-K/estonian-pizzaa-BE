@@ -9,6 +9,7 @@ import com.example.estonianpizzaaBE.model.DeliveryStatus;
 import com.example.estonianpizzaaBE.model.OrderStatus;
 import com.example.estonianpizzaaBE.repository.DeliveryRepository;
 import com.example.estonianpizzaaBE.service.DeliveryService;
+import com.example.estonianpizzaaBE.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

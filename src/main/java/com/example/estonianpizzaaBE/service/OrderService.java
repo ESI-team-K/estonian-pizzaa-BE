@@ -1,4 +1,4 @@
-package com.example.estonianpizzaaBE.controller;
+package com.example.estonianpizzaaBE.service;
 
 import java.time.Instant;
 import java.util.ArrayList;

@@ -7,12 +7,15 @@ import com.example.estonianpizzaaBE.model.MenuItem;
 import com.example.estonianpizzaaBE.model.Order;
 import com.example.estonianpizzaaBE.model.OrderStatus;
 import com.example.estonianpizzaaBE.model.OrderType;
+import com.example.estonianpizzaaBE.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -37,6 +40,12 @@ public class OrderController {
         orderService.saveOrder(newOrder);
         return newOrder.getOrderId();
 	}
+
+    @GetMapping("/order/{id}/")
+    public @ResponseBody Order getOrder(@PathVariable long id)
+    {
+        return orderService.fetchOrderById(id);
+    }
 
     @PutMapping("/order/{id}/confirm")
     public void confirmOrder(@PathVariable long id)
