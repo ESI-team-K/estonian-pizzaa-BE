@@ -46,6 +46,12 @@ public class OrderController {
     {
         return orderService.fetchOrderById(id);
     }
+    
+    // @GetMapping("/order/{id}/cart")
+    // public @ResponseBody Order getCart(@PathVariable long id)
+    // {
+    //     return orderService.fetchOrderById(id);
+    // }
 
     @PutMapping("/order/{id}/confirm")
     public void confirmOrder(@PathVariable long id)

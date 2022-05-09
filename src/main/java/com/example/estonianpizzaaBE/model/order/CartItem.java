@@ -9,17 +9,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.example.estonianpizzaaBE.model.MenuItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id;
     @OneToOne
     MenuItem menuItem;
 
     @ManyToOne
     @JoinColumn(name="order_id")
+    @JsonIgnore
     private Order order;
 
     public CartItem() {
@@ -40,7 +43,17 @@ public class CartItem {
     public void setMenuItem(MenuItem menuItem) {
         this.menuItem = menuItem;
     }
-    public CartItem(MenuItem menuItem) {
+
+    public CartItem(MenuItem menuItem, Order order) {
         this.menuItem = menuItem;
+        this.order = order;
+    }
+    
+    public Order getOrder() {
+        return this.order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

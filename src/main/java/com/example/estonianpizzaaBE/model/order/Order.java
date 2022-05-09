@@ -63,12 +63,12 @@ public class Order {
         this.status = status;
         this.type = type;
         this.cancellationRequest = null;
-        List<CartItem> cartItems = new ArrayList<CartItem>();
+        this.cartItems = new ArrayList<CartItem>();
         for (MenuItem item : shoppingCart) 
         {
-            cartItems.add(new CartItem(item));
+            CartItem cartItem = new CartItem(item, this);
+            this.cartItems.add(cartItem);
         }
-        this.cartItems = cartItems;
     }
 
     public long getOrderId() {
@@ -119,6 +119,14 @@ public class Order {
     public void setStartDate(Instant startDate) {
         this.startDate = startDate;
     }
+    
+    public List<CartItem> getCartItems() {
+        return this.cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
 
     public Order() {
         this.startDate = Instant.now();
@@ -127,4 +135,5 @@ public class Order {
         this.type = null;
         this.cancellationRequest = null;
     }
+    
 }
