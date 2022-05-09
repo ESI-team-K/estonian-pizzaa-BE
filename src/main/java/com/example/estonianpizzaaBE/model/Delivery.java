@@ -2,23 +2,40 @@ package com.example.estonianpizzaaBE.model;
 
 import java.time.Instant;
 
+import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name = "delivery")
 public class Delivery {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    private final long deliveryId;
-    private final long driverId;
-    private final long estimateDeliveryTime; // minute
-    private final Instant startDeliveryTime;
-    private final Instant endDeliveryTime;
+    @Column(name = "driverId")
+    private long driverId;
+
+    @Column(name = "estimateDeliveryTime")
+    private long estimateDeliveryTime; // minute
+
+    @Column(name = "startDeliveryTime")
+    private Instant startDeliveryTime;
+
+    @Column(name = "endDeliveryTime")
+    private Instant endDeliveryTime;
+
     // TODO: Recipient model /
-    private final String recipientName;
-    private final String recipientPhoneNumber;
-    private final String recipientAddress;
+    private String recipientName;
+    private String recipientPhoneNumber;
+    private String recipientAddress;
     // TODO: Enum
-    private final String deliveryStatus;
+    private String deliveryStatus;
 
-    public Delivery(long deliveryId, long driverId, long estimateDeliveryTime, String recipientName,
+    public Delivery() {
+    }
+
+    public Delivery(long driverId, long estimateDeliveryTime, String recipientName,
             String recipientPhoneNumber, String recipientAddress) {
-        this.deliveryId = deliveryId;
         this.driverId = driverId;
         this.estimateDeliveryTime = estimateDeliveryTime;
         this.startDeliveryTime = Instant.now();
@@ -30,7 +47,7 @@ public class Delivery {
     }
 
     public long getId() {
-        return deliveryId;
+        return id;
     }
 
     public long getDriverId() {
