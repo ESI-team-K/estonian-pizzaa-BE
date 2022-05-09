@@ -1,5 +1,9 @@
 package com.example.estonianpizzaaBE.controller;
 
+
+import java.util.ArrayList;
+
+import com.example.estonianpizzaaBE.model.MenuItem;
 import com.example.estonianpizzaaBE.model.Order;
 import com.example.estonianpizzaaBE.model.OrderStatus;
 import com.example.estonianpizzaaBE.model.OrderType;
@@ -8,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -17,10 +22,18 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    static class OrderRequest {
+        public OrderType type;
+        public ArrayList<MenuItem> shoppingCart;
+    }
+
 	@PostMapping("/order/create")
-	public long createOrder(OrderType type){
+	public long createOrder(@RequestBody OrderRequest orderRequest){
+        OrderType type = orderRequest.type;
+        ArrayList<MenuItem> cart = orderRequest.shoppingCart;
+
         if (type == null) { type = OrderType.DELIVERY; }
-        Order newOrder = new Order(OrderStatus.PENDING, type);
+        Order newOrder = new Order(OrderStatus.PENDING, type, cart);
         orderService.saveOrder(newOrder);
         return newOrder.getOrderId();
 	}
@@ -47,4 +60,6 @@ public class OrderController {
     {
         orderService.updateOrderStatus(id, status);
     }
+
+
 }

@@ -33,31 +33,39 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cancellation_id", referencedColumnName = "id")
     private CancellationRequest cancellationRequest;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "orderItem_id")
-    private List<MenuItem> orderItems = new ArrayList<>();
+    @OneToMany(mappedBy="order", cascade = CascadeType.ALL) 
+    private List<CartItem> cartItems;
 
     public Order(long orderId, 
                  Instant startDate, 
                  Instant endDate, 
                  OrderStatus status, 
                  OrderType type,
-                 CancellationRequest cancellationRequest) {
+                 CancellationRequest cancellationRequest,
+                 List<CartItem> cartItems) {
         this.orderId = orderId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
         this.type = type;
         this.cancellationRequest = cancellationRequest;
+        this.cartItems = cartItems;
     }
 
     public Order(OrderStatus status, 
-                 OrderType type) {
+                 OrderType type,
+                 List<MenuItem> shoppingCart) {
         this.startDate = Instant.now();
         this.endDate = null;
         this.status = status;
         this.type = type;
         this.cancellationRequest = null;
+        List<CartItem> cartItems = new ArrayList<CartItem>();
+        for (MenuItem item : shoppingCart) 
+        {
+            cartItems.add(new CartItem(item));
+        }
+        this.cartItems = cartItems;
     }
 
     public long getOrderId() {

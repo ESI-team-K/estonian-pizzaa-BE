@@ -15,6 +15,7 @@ import java.util.Set;
 public class Invoice {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Instant created;

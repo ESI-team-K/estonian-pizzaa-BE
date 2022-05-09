@@ -13,6 +13,7 @@ import java.time.Instant;
 public class Payment {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Instant created;

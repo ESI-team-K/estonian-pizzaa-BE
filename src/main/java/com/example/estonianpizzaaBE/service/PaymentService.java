@@ -124,7 +124,16 @@ public class PaymentService {
 
     public Payment refundPayment(Long id) {
         // Replace logic when actual payment implemented
-        setPaymentToCanceled(id);
-        return paymentRepository.findById(id).orElseThrow(PaymentNotFoundException::new);
+        Payment payment = paymentRepository.findById(id).orElseThrow(PaymentNotFoundException::new);
+        payment.setStatus(PaymentStatus.CANCELLED);
+        return paymentRepository.save(payment);
+    }
+
+    public Iterable<Payment> getPayments() {
+        return paymentRepository.findAll();
+    }
+
+    public Invoice getInvoice(Long id) {
+        return invoiceRepository.findById(id).orElseThrow(PaymentNotFoundException::new);
     }
 }
