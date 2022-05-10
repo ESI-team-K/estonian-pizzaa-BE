@@ -17,7 +17,8 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private long id;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="menu_item_id")
     MenuItem menuItem;
 
     @ManyToOne
