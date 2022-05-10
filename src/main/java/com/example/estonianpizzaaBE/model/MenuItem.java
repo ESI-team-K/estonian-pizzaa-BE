@@ -34,6 +34,23 @@ public class MenuItem {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+    public void setSize(long size) {
+        this.size = size;
+    }
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
     public String getIngredients() {
         return ingredients;
     }
