@@ -1,6 +1,9 @@
 package com.example.estonianpizzaaBE.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import com.example.estonianpizzaaBE.model.MenuItem;
 import com.example.estonianpizzaaBE.model.order.Order;
@@ -41,6 +44,19 @@ public class OrderController {
         Order newOrder = new Order(OrderStatus.PENDING, type, cart, customerId);
         orderService.saveOrder(newOrder);
         return newOrder.getOrderId();
+    }
+
+    @GetMapping("/orderList")
+    public @ResponseBody List<Order> getOrders()
+    {
+        List<Order> orders = orderService.getAllOrders();
+        // Orders are sorted by start date
+        Collections.sort(orders, new Comparator<Order>() {
+            public int compare(Order o1, Order o2) {
+                return o1.getStartDate().compareTo(o2.getStartDate());
+            }
+          });
+        return orders;
     }
 
     @GetMapping("/order/{id}/")
