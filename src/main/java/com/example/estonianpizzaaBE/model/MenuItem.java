@@ -64,5 +64,16 @@ public class MenuItem {
         return price;
     }
 
+    public MenuItem() {
+    }
+
+    public MenuItem(long id, String name, String ingredients, long size, long price) {
+        this.id = id;
+        this.name = name;
+        this.ingredients = ingredients;
+        this.size = size;
+        this.price = price;
+    }
+
 
 }
