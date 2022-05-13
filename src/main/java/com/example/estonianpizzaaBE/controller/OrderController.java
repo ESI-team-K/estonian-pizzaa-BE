@@ -73,13 +73,11 @@ public class OrderController {
     @PutMapping("/order/{id}/cancel")
     public void sendCancellationRequest(@PathVariable long id) {
         orderService.sendCancellationRequest(id);
-        ;
     }
 
     @PutMapping("/order/{id}/cancel/approve")
     public void approveCancellationRequest(@PathVariable long id) {
         orderService.approveCancellationRequest(id);
-        ;
     }
 
     public void updateOrderStatus(long id, OrderStatus status) // If needed, this is available for any other status
