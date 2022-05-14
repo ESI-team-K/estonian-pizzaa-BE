@@ -99,8 +99,8 @@ public class DeliveryController {
     @PutMapping("/order/{id}/rejectDelivery")
     public void rejectDelivery(@PathVariable long id) {
         Delivery _delivery = deliveryRepository.findByOrderId(id);
-        deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.READY);
-        orderService.updateOrderStatus(id, OrderStatus.CONFIRMED);
+        deliveryRepository.deleteById(_delivery.getId());
+        orderService.updateOrderStatus(id, OrderStatus.CANCELLED);
     }
 
     // Deliver can be deleted and assign to a new driver
