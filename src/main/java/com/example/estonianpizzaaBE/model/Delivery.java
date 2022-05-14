@@ -1,11 +1,10 @@
 package com.example.estonianpizzaaBE.model;
 
-import java.time.Instant;
-
-import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Table(name = "delivery")
@@ -52,7 +51,7 @@ public class Delivery {
         this.recipientName = recipientName;
         this.recipientPhoneNumber = recipientPhoneNumber;
         this.recipientAddress = recipientAddress;
-        this.status = DeliveryStatus.READY;
+        this.status = DeliveryStatus.NOT_READY;
     }
 
 }

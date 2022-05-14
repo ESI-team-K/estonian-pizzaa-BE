@@ -9,7 +9,8 @@ public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
-    @Column(name = "name")
+
+    @Column(name = "name", unique = true)
     public String name;
     @Column(name = "ingredients")
     public String ingredients;
