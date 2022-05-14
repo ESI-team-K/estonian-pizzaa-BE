@@ -12,26 +12,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DriverService {
-    
-    @Autowired 
+
+    @Autowired
     private DriverRepository DriverRepository;
-    
-    public List<Driver> getAllDrivers(){
+
+    public List<Driver> getAllDrivers() {
         List<Driver> drivers = new ArrayList<>();
         DriverRepository.findAll().forEach(drivers::add);
         return drivers;
     }
 
-    public Driver fetchDriverById(Long id)
-    {
+    public Driver fetchDriverById(Long id) {
         return DriverRepository.findById(id).get();
     }
 
-    public void updateDriverStatus(Long id, DriverStatus status)
-    {
+    public void updateDriverStatus(Long id, DriverStatus status) {
         Driver driver = fetchDriverById(id);
-        // driver.setStatus(status);
+        driver.setStatus(status);
         DriverRepository.save(driver);
     }
-    
+
 }

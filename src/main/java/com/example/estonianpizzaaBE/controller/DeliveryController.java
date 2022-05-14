@@ -54,6 +54,16 @@ public class DeliveryController {
         return new ResponseEntity<>(delivery, HttpStatus.OK);
     }
 
+    @GetMapping("/deliveries/driver/{id}")
+    public ResponseEntity<List<Delivery>> getByUserId(@PathVariable("id") long id) {
+        List<Delivery> noti = new ArrayList<Delivery>();
+        deliveryRepository.findByDriverId(id).forEach(noti::add);
+        if (noti.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(noti, HttpStatus.OK);
+    }
+
     @PostMapping("/order/{id}/delivery")
     public ResponseEntity<Delivery> create(@RequestBody Delivery delivery, @PathVariable long id) {
         // TODO: can improve by check first if it already create
