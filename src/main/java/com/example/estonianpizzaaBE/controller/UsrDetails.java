@@ -1,56 +1,56 @@
-package com.example.estonianpizzaaBE.controller;
+// package com.example.estonianpizzaaBE.controller;
 
-import java.util.Arrays;
-import java.util.List;
+// import java.util.Arrays;
+// import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.core.userdetails.UserDetails;
 
-public class UsrDetails extends User implements UserDetails  {
+// public class UsrDetails extends User implements UserDetails  {
 
-    private User user;
+//     private User user;
 
-    public UsrDetails(final User user) {
-        this.user = user;
-    }
+//     public UsrDetails(final User user) {
+//         this.user = user;
+//     }
 
-@Override
-    public List<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRoles());
-        return Arrays.asList(authority);
-    }
+// @Override
+//     public List<? extends GrantedAuthority> getAuthorities() {
+//         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRoles());
+//         return Arrays.asList(authority);
+//     }
 
-    @Override
-    public String getPassword() {
-        return user.getPassword();
-    }
+//     @Override
+//     public String getPassword() {
+//         return user.getPassword();
+//     }
 
-    @Override
-    public String getUsername() {
-        return user.getName();
-    }
+//     @Override
+//     public String getUsername() {
+//         return user.getName();
+//     }
 
-   //hard-coding these attributes
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+//    //hard-coding these attributes
+//     @Override
+//     public boolean isAccountNonExpired() {
+//         return true;
+//     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+//     @Override
+//     public boolean isAccountNonLocked() {
+//         return true;
+//     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+//     @Override
+//     public boolean isCredentialsNonExpired() {
+//         return true;
+//     }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+//     @Override
+//     public boolean isEnabled() {
+//         return true;
+//     }
 
     
-}
+// }
