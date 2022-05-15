@@ -1,3 +1,7 @@
+INSERT INTO roles(name) VALUES('ROLE_CUSTOMER');
+INSERT INTO roles(name) VALUES('ROLE_STAFF');
+INSERT INTO roles(name) VALUES('ROLE_DRIVER');
+
 -- INSERT INTO public.alluser (user_id, name, password, roles)
 -- SELECT * FROM (SELECT 1, 'staff', 'pass', 'STAFF') AS tmp
 -- WHERE NOT EXISTS (
