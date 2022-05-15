@@ -8,4 +8,9 @@
 
 -- );
 
+CREATE TABLE IF NOT EXISTS public.roles (
+name VARCHAR(255) NOT NULL
+);
+
+
  
