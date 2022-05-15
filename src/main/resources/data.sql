@@ -1,19 +1,19 @@
 INSERT INTO public.alluser (user_id, name, password, roles)
-SELECT * FROM (SELECT 1, 'staff', 'staff', 'STAFF') AS tmp
+SELECT * FROM (SELECT 1, 'staff', 'pass', 'STAFF') AS tmp
 WHERE NOT EXISTS (
-    SELECT name FROM pizzaa.alluser  WHERE user_id = '1'
+    SELECT name FROM public.alluser  WHERE user_id = '1'
 ) LIMIT 1;
 
 INSERT INTO public.alluser (user_id, name, password, roles)
-SELECT * FROM (SELECT 2, 'driver', 'driver', 'DRIVER') AS tmp
+SELECT * FROM (SELECT 2, 'driver', 'pass', 'DRIVER') AS tmp
 WHERE NOT EXISTS (
-    SELECT name FROM pizzaa.alluser  WHERE user_id = '2'
+    SELECT name FROM public.alluser  WHERE user_id = '2'
 ) LIMIT 1;
 
-INSERT INTO pulic.alluser (user_id, name, password, roles)
-SELECT * FROM (SELECT 3, 'customer', 'customer', 'CUSTOMER') AS tmp
+INSERT INTO public.alluser (user_id, name, password, roles)
+SELECT * FROM (SELECT 3, 'customer', 'pass', 'CUSTOMER') AS tmp
 WHERE NOT EXISTS (
-    SELECT name FROM pizzaa.alluser  WHERE user_id = '3'
+    SELECT name FROM public.alluser  WHERE user_id = '3'
 ) LIMIT 1;
 
 INSERT INTO customers(username, email, password, phone_number)
