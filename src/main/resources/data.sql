@@ -1,24 +1,21 @@
-INSERT INTO roles(name) VALUES('ROLE_CUSTOMER');
-INSERT INTO roles(name) VALUES('ROLE_STAFF');
-INSERT INTO roles(name) VALUES('ROLE_DRIVER');
+INSERT INTO public.roles (id, name)
+SELECT * FROM (SELECT 1, 'ROLE_CUSTOMER') AS tp
+WHERE NOT EXISTS (
+    SELECT name FROM public.roles  WHERE id = '1'
+) LIMIT 1 ON CONFLICT DO NOTHING;
 
--- INSERT INTO public.alluser (user_id, name, password, roles)
--- SELECT * FROM (SELECT 1, 'staff', 'pass', 'STAFF') AS tmp
--- WHERE NOT EXISTS (
---     SELECT name FROM public.alluser  WHERE user_id = '1'
--- ) LIMIT 1;
+INSERT INTO public.roles (id, name)
+SELECT * FROM (SELECT 2, 'ROLE_STAFF') AS tp
+WHERE NOT EXISTS (
+    SELECT name FROM public.roles  WHERE id = '2'
+) LIMIT 1 ON CONFLICT DO NOTHING;
 
--- INSERT INTO public.alluser (user_id, name, password, roles)
--- SELECT * FROM (SELECT 2, 'driver', 'pass', 'DRIVER') AS tmp
--- WHERE NOT EXISTS (
---     SELECT name FROM public.alluser  WHERE user_id = '2'
--- ) LIMIT 1;
 
--- INSERT INTO public.alluser (user_id, name, password, roles)
--- SELECT * FROM (SELECT 3, 'customer', 'pass', 'CUSTOMER') AS tmp
--- WHERE NOT EXISTS (
---     SELECT name FROM public.alluser  WHERE user_id = '3'
--- ) LIMIT 1;
+INSERT INTO public.roles (id, name)
+SELECT * FROM (SELECT 3,'ROLE_DRIVER') AS tp
+WHERE NOT EXISTS (
+    SELECT name FROM public.roles  WHERE id = '3'
+) LIMIT 1 ON CONFLICT DO NOTHING;
 
 INSERT INTO customers(username, email, password, phone_number)
 VALUES ('Monika', 'asdf@jt.ee', '1234', '+37258902211') ON CONFLICT DO NOTHING;

@@ -2,7 +2,10 @@ package com.example.estonianpizzaaBE.model;
 
 import javax.persistence.*;
 @Entity
-@Table(name = "roles")
+@Table(name = "roles", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "name")
+})
+
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
