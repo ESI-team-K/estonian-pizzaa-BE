@@ -1,8 +1,5 @@
 package com.example.estonianpizzaaBE.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.estonianpizzaaBE.exception.ResourceNotFoundException;
 import com.example.estonianpizzaaBE.model.Delivery;
 import com.example.estonianpizzaaBE.model.DeliveryStatus;
@@ -12,20 +9,15 @@ import com.example.estonianpizzaaBE.model.order.OrderStatus;
 import com.example.estonianpizzaaBE.repository.DeliveryRepository;
 import com.example.estonianpizzaaBE.repository.DriverRepository;
 import com.example.estonianpizzaaBE.service.DeliveryService;
-import com.example.estonianpizzaaBE.service.OrderService;
 import com.example.estonianpizzaaBE.service.NotificationService;
-
+import com.example.estonianpizzaaBE.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -62,6 +54,16 @@ public class DeliveryController {
         return new ResponseEntity<>(delivery, HttpStatus.OK);
     }
 
+    @GetMapping("/deliveries/driver/{id}")
+    public ResponseEntity<List<Delivery>> getByUserId(@PathVariable("id") long id) {
+        List<Delivery> noti = new ArrayList<Delivery>();
+        deliveryRepository.findByDriverId(id).forEach(noti::add);
+        if (noti.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(noti, HttpStatus.OK);
+    }
+
     @PostMapping("/order/{id}/delivery")
     public ResponseEntity<Delivery> create(@RequestBody Delivery delivery, @PathVariable long id) {
         // TODO: can improve by check first if it already create
@@ -76,6 +78,13 @@ public class DeliveryController {
                         delivery.getRecipientName(), delivery.getRecipientPhoneNumber(),
                         delivery.getRecipientAddress()));
         return new ResponseEntity<>(_delivery, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/order/{id}/readyForDelivery")
+    public void readyForDelivery(@PathVariable long id) {
+        Delivery _delivery = deliveryRepository.findByOrderId(id);
+        deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.READY);
+        notificationService.sendNotification(_delivery.getDriverId(), "driver");
     }
 
     // TODO: can add verify status
@@ -99,8 +108,8 @@ public class DeliveryController {
     @PutMapping("/order/{id}/rejectDelivery")
     public void rejectDelivery(@PathVariable long id) {
         Delivery _delivery = deliveryRepository.findByOrderId(id);
-        deliveryService.updateDeliveryStatus(_delivery.getId(), DeliveryStatus.READY);
-        orderService.updateOrderStatus(id, OrderStatus.CONFIRMED);
+        deliveryRepository.deleteById(_delivery.getId());
+        orderService.updateOrderStatus(id, OrderStatus.CANCELLED);
     }
 
     // Deliver can be deleted and assign to a new driver

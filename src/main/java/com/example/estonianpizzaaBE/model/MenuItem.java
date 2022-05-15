@@ -9,7 +9,8 @@ public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
-    @Column(name = "name")
+
+    @Column(name = "name", unique = true)
     public String name;
     @Column(name = "ingredients")
     public String ingredients;
@@ -34,6 +35,23 @@ public class MenuItem {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+    public void setSize(long size) {
+        this.size = size;
+    }
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
     public String getIngredients() {
         return ingredients;
     }
@@ -45,6 +63,17 @@ public class MenuItem {
 
     public long getPrice() {
         return price;
+    }
+
+    public MenuItem() {
+    }
+
+    public MenuItem(long id, String name, String ingredients, long size, long price) {
+        this.id = id;
+        this.name = name;
+        this.ingredients = ingredients;
+        this.size = size;
+        this.price = price;
     }
 
 

@@ -31,8 +31,8 @@ public class PaymentService {
         Invoice invoice = new Invoice();
         invoice.setCreated(Instant.now());
         invoice.setMenuItems(menuItems.stream().map(MenuItem::getId).collect(Collectors.toSet()));
-        // TODO Calculate fee
-        // TODO calculate total
+        invoice.setFee(0);
+        invoice.setTotal(menuItems.stream().mapToLong(MenuItem::getPrice).sum());
         Payment payment = createPayment(invoice);
         invoice.setPayment(payment);
         return invoiceRepository.save(invoice);
