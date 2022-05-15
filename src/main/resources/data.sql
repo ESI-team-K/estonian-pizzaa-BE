@@ -1,3 +1,22 @@
+INSERT INTO public.roles (id, name)
+SELECT * FROM (SELECT 1, 'ROLE_CUSTOMER') AS tp
+WHERE NOT EXISTS (
+    SELECT name FROM public.roles  WHERE id = '1'
+) LIMIT 1 ON CONFLICT DO NOTHING;
+
+INSERT INTO public.roles (id, name)
+SELECT * FROM (SELECT 2, 'ROLE_STAFF') AS tp
+WHERE NOT EXISTS (
+    SELECT name FROM public.roles  WHERE id = '2'
+) LIMIT 1 ON CONFLICT DO NOTHING;
+
+
+INSERT INTO public.roles (id, name)
+SELECT * FROM (SELECT 3,'ROLE_DRIVER') AS tp
+WHERE NOT EXISTS (
+    SELECT name FROM public.roles  WHERE id = '3'
+) LIMIT 1 ON CONFLICT DO NOTHING;
+
 INSERT INTO customers(username, email, password, phone_number)
 VALUES ('Monika', 'asdf@jt.ee', '1234', '+37258902211') ON CONFLICT DO NOTHING;
 INSERT INTO menuitems(id, name, price, size, ingredients)

@@ -7,7 +7,7 @@ import com.example.estonianpizzaaBE.model.ERole;
 import com.example.estonianpizzaaBE.model.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    static Optional<Role> findByName(ERole name) {
-        return null;
-    }
+	Optional<Role> findByName(ERole name);
 }
+
+
