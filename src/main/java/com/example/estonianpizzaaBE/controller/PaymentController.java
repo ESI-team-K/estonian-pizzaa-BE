@@ -46,7 +46,7 @@ public class PaymentController {
         return new ResponseEntity<>(payment, null, 200);
     }
 
-    @PatchMapping("/{id}/pay/cash")
+    @PutMapping("/{id}/pay/cash")
     public ResponseEntity<Payment> payByCash(@PathVariable Long id) {
         // Auth?
         Payment payment = paymentService.payByCash(id);
