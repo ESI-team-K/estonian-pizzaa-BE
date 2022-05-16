@@ -1,5 +1,6 @@
 package com.example.estonianpizzaaBE.security;
 
+import com.example.estonianpizzaaBE.model.ERole;
 import com.example.estonianpizzaaBE.security.jwt.AuthEntryPointJwt;
 import com.example.estonianpizzaaBE.security.jwt.AuthTokenFilter;
 import com.example.estonianpizzaaBE.security.services.UserDetailsServiceImpl;
@@ -64,6 +65,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests().antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/test/**").permitAll()
+            .antMatchers("/api/customers/**").hasAnyRole(ERole.ROLE_STAFF.toString())
+            .antMatchers("/api/driver/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
+            .antMatchers("/api/drivers/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
+            .antMatchers("/api/payment/**").hasAnyRole(ERole.ROLE_CUSTOMER.toString(), ERole.ROLE_STAFF.toString())
+            .antMatchers("/deliveries/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
+            .antMatchers("/delivery/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
+            .antMatchers("/menu/**").permitAll()
+            .antMatchers("/notification/**").permitAll()
+            .antMatchers("/notifications").permitAll()
+            .antMatchers("/order/**").hasAnyRole(ERole.ROLE_STAFF.toString())
+            .antMatchers("/orderList").hasAnyRole(ERole.ROLE_STAFF.toString())
             .anyRequest().authenticated();
 
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
