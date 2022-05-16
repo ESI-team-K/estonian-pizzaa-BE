@@ -1,5 +1,6 @@
 package com.example.estonianpizzaaBE.security;
 
+import com.example.estonianpizzaaBE.model.ERole;
 import com.example.estonianpizzaaBE.security.jwt.AuthEntryPointJwt;
 import com.example.estonianpizzaaBE.security.jwt.AuthTokenFilter;
 import com.example.estonianpizzaaBE.security.services.UserDetailsServiceImpl;
@@ -73,6 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/menu/**").permitAll()
             .antMatchers("/notification/**").permitAll()
             .antMatchers("/notifications").permitAll()
+            .antMatchers("/notifications/**").permitAll()
             .antMatchers("/order/**").hasAnyRole("STAFF", "CUSTOMER")
             .antMatchers("/order/create").hasAnyRole("CUSTOMER")
             .antMatchers("/orderList").hasAnyRole("STAFF")
