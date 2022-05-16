@@ -61,23 +61,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
-            .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-            .antMatchers("/api/test/**").permitAll()
-            .antMatchers("/api/customers/**").hasAnyRole(ERole.ROLE_STAFF.toString())
-            .antMatchers("/api/driver/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
-            .antMatchers("/api/drivers/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
-            .antMatchers("/api/payment/**").hasAnyRole(ERole.ROLE_CUSTOMER.toString(), ERole.ROLE_STAFF.toString())
-            .antMatchers("/deliveries/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
-            .antMatchers("/delivery/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
-            .antMatchers("/menu/**").permitAll()
-            .antMatchers("/notification/**").permitAll()
-            .antMatchers("/notifications").permitAll()
-            .antMatchers("/order/**").hasAnyRole(ERole.ROLE_STAFF.toString(), ERole.ROLE_CUSTOMER.toString())
-            .antMatchers("/orders/create").hasAnyRole(ERole.ROLE_CUSTOMER.toString())
-            .antMatchers("/orderList").hasAnyRole(ERole.ROLE_STAFF.toString())
-            .anyRequest().authenticated();
+        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+        .antMatchers("/api/test/**").permitAll()
+        .antMatchers("/api/customers/**").hasAnyRole(ERole.ROLE_STAFF.toString())
+        .antMatchers("/api/driver/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
+        .antMatchers("/api/drivers/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
+        .antMatchers("/api/payment/**").hasAnyRole(ERole.ROLE_CUSTOMER.toString(), ERole.ROLE_STAFF.toString())
+        .antMatchers("/deliveries/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
+        .antMatchers("/delivery/**").hasAnyRole(ERole.ROLE_DRIVER.toString())
+        .antMatchers("/menu/**").permitAll()
+        .antMatchers("/notification/**").permitAll()
+        .antMatchers("/notifications").permitAll()
+        .antMatchers("/notifications/**").permitAll()
+        .antMatchers("/order/**").hasAnyRole(ERole.ROLE_STAFF.toString(), ERole.ROLE_CUSTOMER.toString())
+        .antMatchers("/orders/create").hasAnyRole(ERole.ROLE_CUSTOMER.toString())
+        .antMatchers("/orderList").hasAnyRole(ERole.ROLE_STAFF.toString())
+        .anyRequest().authenticated();
 
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
   }
