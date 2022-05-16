@@ -74,7 +74,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/menu/**").permitAll()
             .antMatchers("/notification/**").permitAll()
             .antMatchers("/notifications").permitAll()
-            .antMatchers("/order/**").hasAnyRole(ERole.ROLE_STAFF.toString())
+            .antMatchers("/order/**").hasAnyRole(ERole.ROLE_STAFF.toString(), ERole.ROLE_CUSTOMER.toString())
+            .antMatchers("/orders/create").hasAnyRole(ERole.ROLE_CUSTOMER.toString())
             .antMatchers("/orderList").hasAnyRole(ERole.ROLE_STAFF.toString())
             .anyRequest().authenticated();
 
